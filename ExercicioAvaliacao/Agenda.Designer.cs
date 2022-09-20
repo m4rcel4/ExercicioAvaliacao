@@ -134,6 +134,7 @@
             this.dgwAgenda.Name = "dgwAgenda";
             this.dgwAgenda.Size = new System.Drawing.Size(690, 135);
             this.dgwAgenda.TabIndex = 13;
+            this.dgwAgenda.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwAgenda_CellDoubleClick);
             // 
             // label11
             // 
