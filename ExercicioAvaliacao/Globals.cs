@@ -17,8 +17,33 @@ namespace ExercicioAvaliacao
         public static string dataNova;
 
 
+
+        public static DateTime dataVenc;
+        public static string dataVencimento;
+
+
+        public static int recebido;
+        
+
+
+
+
         public static DateTime Data { get; set; }
 
         public static string DataNova { get; set;}
+
+
+
+
+        public static DateTime DataVenc { get; set; }
+
+        public static string DataVencimento { get; set; }
+
+
+
+
+        public static int  Recebimento { get; set; }
+
+       
     }
 }

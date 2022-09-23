@@ -23,42 +23,28 @@ namespace ExercicioAvaliacao
 
         private void btnInserir_Click(object sender, EventArgs e)
         {
-            DateTime data = dtpDataVencimento.Value;
-            string dataCurta = data.ToShortDateString();
-            string[] vetData = dataCurta.Split('/');
-            string dataNova = $"{vetData[2]}-{vetData[1]}-{vetData[0]}";
-
-
-
-
-
-
+          
 
             verificaVazio();
+            pegaData();
+            recebimento();
 
 
             if (btnInserir.Text == "INSERIR" && continua == "yes")
             {
-                int recebido;
-
+                
                 try
                 {
-                    if (cbRecebido.Checked)
-                    {
-                        recebido = 0;
-                    }
-                    else
-                    {
-                        recebido = 1;
-                    }
-
+                    
+                   
+                    // tipo 0 é definido para contas a receber
 
                     using (MySqlConnection cnn = new MySqlConnection())
                     {
-                        cnn.ConnectionString = "server=localhost;database=controle;uid=root;pwd=;port=3306";
+                        cnn.ConnectionString = "server = localhost; database = controle; uid = root; pwd =; port = 3306; Convert Zero DateTime = true";
                         cnn.Open();
                         MessageBox.Show("Inserido com sucesso!");
-                        string sql = "insert into contas (nome, descricao,valor,dataVencimento,pago_recebido,tipo) values ('" + txtNome.Text + "', '" + txtDescricao.Text + "','" + txtValor.Text + "', dataNova,recebido, 0 )";
+                        string sql = "insert into contas (nome, descricao,valor,dataVencimento,pago_recebido,tipo) values ('" + txtNome.Text + "', '" + txtDescricao.Text + "','" + txtValor.Text + "','" + Globals.dataVencimento + "' ,'" + Globals.Recebimento + "', '" + 0 +"')";
                         MySqlCommand cmd = new MySqlCommand(sql, cnn);
                         cmd.ExecuteNonQuery();
 
@@ -87,7 +73,7 @@ namespace ExercicioAvaliacao
             {
                 using (MySqlConnection cnn = new MySqlConnection())
                 {
-                    cnn.ConnectionString = "server=localhost;database=controle;uid=root;pwd=;port=3306";
+                    cnn.ConnectionString = "server = localhost; database = controle; uid = root; pwd =; port = 3306; Convert Zero DateTime = true";
                     cnn.Open();
                     string sql = "Select * from contas";
                     DataTable table = new DataTable();
@@ -138,18 +124,9 @@ namespace ExercicioAvaliacao
 
 
 
-
-
-
-
-
-
-
-        private void dtpDataVencimento_ValueChanged(object sender, EventArgs e)
+       /* private void dtpDataVencimento_ValueChanged(object sender, EventArgs e)
         {
-
-
-        }
+        }*/
 
         private void dgwContasReceber_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -157,11 +134,103 @@ namespace ExercicioAvaliacao
             txtNome.Text = dgwContasReceber.CurrentRow.Cells[1].Value.ToString();
             txtDescricao.Text = dgwContasReceber.CurrentRow.Cells[2].Value.ToString();
             txtValor.Text = dgwContasReceber.CurrentRow.Cells[3].Value.ToString();
-            cbRecebido.Text = dgwContasReceber.CurrentRow.Cells[4].Value.ToString();
+          
+            dtpDataVencimento.Value = Convert.ToDateTime(dgwContasReceber.CurrentRow.Cells[5].ToString());
 
             btnDeletar.Visible = true;
             btnAlterar.Visible = true;
             btnInserir.Text = "Novo";
+        }
+
+
+        void pegaData()// método para a data que o sitema retorna ser compatível com o modelo exigido pelo banco
+        {
+            Globals.DataVenc = dtpDataVencimento.Value;// usei a variável criada no GLOBALS, ela vai receber o valor da dtpData
+            string dataCurta = Globals.DataVenc.ToShortDateString();
+            string[] vetData = dataCurta.Split('/');
+            Globals.DataVencimento = $"{vetData[2]}-{vetData[1]}-{vetData[0]}";
+
+        }
+
+        private void btnAlterar_Click(object sender, EventArgs e)
+        {
+
+
+
+            pegaData();
+
+            try
+            {
+                using (MySqlConnection cnn = new MySqlConnection())
+                {
+                    cnn.ConnectionString = "server=localhost;database=controle;uid=root;pwd=;port=3306;Convert Zero DateTime = true";
+                    cnn.Open();
+                    string sql = "Update contas set nome='" + txtNome.Text + "', descricao='" + txtDescricao.Text + "',valor='" + txtValor.Text + "', pago_recebido='" + Globals.Recebimento + "' where idContas='" + txtIdContasReceber.Text + "'";
+                    //idContas vai ser igual ao txtIdContasRecber. é a mesma tabela, mas o id vai diferenciar se é a pagar ou receber
+                    MySqlCommand cmd = new MySqlCommand(sql, cnn);
+                    cmd.ExecuteNonQuery();
+                    MessageBox.Show("Atualizado com sucesso!");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            mostrar();
+
+        }
+
+
+
+
+
+        void recebimento()
+        {
+
+            if (cbRecebido.Checked)
+            {
+                Globals.Recebimento = 1;
+
+            }
+            else
+            {
+                Globals.Recebimento = 0;
+            }
+
+        }
+
+
+
+        private void btnDeletar_Click(object sender, EventArgs e)
+        {
+            if (DialogResult.Yes == MessageBox.Show("Deseja realmente excluir", "Confirmação", MessageBoxButtons.YesNo))
+            {
+
+                try
+                {
+                    using (MySqlConnection cnn = new MySqlConnection())
+                    {
+                        cnn.ConnectionString = "server=localhost;database=controle;uid=root;pwd=;port=3306;Convert Zero DateTime = true";
+                        cnn.Open();
+                        string sql = "Delete from contas where idContas = '" + txtIdContasReceber.Text + "'";
+                        MySqlCommand cmd = new MySqlCommand(sql, cnn);
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show(" Deletado com sucesso! ");
+
+                    }
+                    limpar();
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+
+
+            }
+            mostrar();
+
         }
     }
 
