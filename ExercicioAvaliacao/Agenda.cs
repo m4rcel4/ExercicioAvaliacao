@@ -33,7 +33,7 @@ namespace ExercicioAvaliacao
             verificaVazioAgenda();
 
             if (continua == "yes")
-                pegaData();
+                pegaData();// colocado antes de fazer a inserção no banco, já que a data precisa ser transformada em "dateTime" antes disso
 
             {
                 try
@@ -45,6 +45,7 @@ namespace ExercicioAvaliacao
                         cnx.ConnectionString = "server = localhost; database = controle; uid = root; pwd =; port = 3306; Convert Zero DateTime = true";
                         cnx.Open();
                         string sql = "insert into agenda (titulo,hora,data,descricao) values ('" + txtTitulo.Text + "','" + cmbHora.Text + "','" + Globals.dataNova + "','" + rtbDescricao.Text + "')";
+                        // "dataNova" já está convertida em data, pronta para ser inserida no banco.
                         MessageBox.Show("Inserido com sucesso!");
                         MySqlCommand cmd = new MySqlCommand(sql, cnx);
                         cmd.ExecuteNonQuery();
@@ -66,7 +67,7 @@ namespace ExercicioAvaliacao
 
 
 
-        void limparAgenda()
+        void limparAgenda()// limpa todos os campos e faz o botão, que estava "novo", voltar a "inserir"
         {
             txtIdAgenda.Text = "";
             txtTitulo.Clear();
@@ -83,7 +84,7 @@ namespace ExercicioAvaliacao
 
 
 
-        void mostrarAgenda() // void mostrar é mostrar todas as informações do banco
+        void mostrarAgenda() //mostra todas as informações do banco na DataGridView
         {
             try
             {
@@ -110,7 +111,7 @@ namespace ExercicioAvaliacao
 
 
 
-        void verificaVazioAgenda()
+        void verificaVazioAgenda()// não deixa inserir no banco quando esses dois txts não estiverem preenchidos
         {
             if (txtTitulo.Text == "" || rtbDescricao.Text == "")
             {
@@ -137,6 +138,7 @@ namespace ExercicioAvaliacao
                 txtTitulo.Text = dgwAgenda.CurrentRow.Cells[1].Value.ToString();
                 cmbHora.Text = dgwAgenda.CurrentRow.Cells[2].Value.ToString();
                 dtpData.Value = Convert.ToDateTime(dgwAgenda.CurrentRow.Cells[3].Value.ToString());
+                //converte para dateTime, porque o sistema retorna a data em string, mas o banco só aceita date
                 rtbDescricao.Text = dgwAgenda.CurrentRow.Cells[4].Value.ToString();
 
 
@@ -149,9 +151,9 @@ namespace ExercicioAvaliacao
 
 
 
-        void pegaData()
+        void pegaData()// método para a data que o sitema retorna ser compatível com o modelo exigido pelo banco
         {
-             Globals.Data = dtpData.Value;
+             Globals.Data = dtpData.Value;// usei a variável criada no GLOBALS, ela vai receber o valor da dtpData
             string dataCurta = Globals.Data.ToShortDateString();
             string[] vetData = dataCurta.Split('/');
             Globals.DataNova = $"{vetData[2]}-{vetData[1]}-{vetData[0]}";
