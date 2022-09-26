@@ -44,7 +44,7 @@ namespace ExercicioAvaliacao
                         cnn.ConnectionString = "server = localhost; database = controle; uid = root; pwd =; port = 3306; Convert Zero DateTime = true";
                         cnn.Open();
                         MessageBox.Show("Inserido com sucesso!");
-                        string sql = "insert into contas (nome, descricao,valor,dataVencimento,pago_recebido,tipo) values ('" + txtNome.Text + "', '" + txtDescricao.Text + "','" + txtValor.Text + "','" + Globals.dataVencimento + "' ,'" + Globals.Recebimento + "', '" + 0 +"')";
+                        string sql = "insert into contas (nome, descricao,valor,dataVencimento,pago_recebido,tipo) values ('" + txtNome.Text + "', '" + txtDescricao.Text + "','" + txtValor.Text + "','" + Globals.DataVencimento + "' ,'" + Globals.Recebimento + "', '" + 0 +"')";
                         MySqlCommand cmd = new MySqlCommand(sql, cnn);
                         cmd.ExecuteNonQuery();
 
@@ -130,16 +130,19 @@ namespace ExercicioAvaliacao
 
         private void dgwContasReceber_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            txtIdContasReceber.Text = dgwContasReceber.CurrentRow.Cells[0].Value.ToString();
-            txtNome.Text = dgwContasReceber.CurrentRow.Cells[1].Value.ToString();
-            txtDescricao.Text = dgwContasReceber.CurrentRow.Cells[2].Value.ToString();
-            txtValor.Text = dgwContasReceber.CurrentRow.Cells[3].Value.ToString();
-          
-            dtpDataVencimento.Value = Convert.ToDateTime(dgwContasReceber.CurrentRow.Cells[5].ToString());
+            if (dgwContasReceber.CurrentRow.Index != -1)
+            {
+                txtIdContasReceber.Text = dgwContasReceber.CurrentRow.Cells[0].Value.ToString();
+                txtNome.Text = dgwContasReceber.CurrentRow.Cells[1].Value.ToString();
+                txtDescricao.Text = dgwContasReceber.CurrentRow.Cells[2].Value.ToString();
+                txtValor.Text = dgwContasReceber.CurrentRow.Cells[3].Value.ToString();
+                dtpDataVencimento.Value = Convert.ToDateTime(dgwContasReceber.CurrentRow.Cells[4].ToString());
 
-            btnDeletar.Visible = true;
-            btnAlterar.Visible = true;
-            btnInserir.Text = "Novo";
+                btnDeletar.Visible = true;
+                btnAlterar.Visible = true;
+                btnInserir.Text = "Novo";
+            }
+
         }
 
 
@@ -230,6 +233,11 @@ namespace ExercicioAvaliacao
 
             }
             mostrar();
+
+        }
+
+        private void dtpDataVencimento_ValueChanged(object sender, EventArgs e)
+        {
 
         }
     }

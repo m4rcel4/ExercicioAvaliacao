@@ -139,6 +139,8 @@
             this.dtpDataVencimento.Name = "dtpDataVencimento";
             this.dtpDataVencimento.Size = new System.Drawing.Size(278, 20);
             this.dtpDataVencimento.TabIndex = 30;
+            this.dtpDataVencimento.Value = new System.DateTime(2022, 9, 26, 0, 0, 0, 0);
+            this.dtpDataVencimento.ValueChanged += new System.EventHandler(this.dtpDataVencimento_ValueChanged);
             // 
             // txtIdContasReceber
             // 
