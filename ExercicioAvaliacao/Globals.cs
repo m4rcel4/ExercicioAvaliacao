@@ -23,7 +23,9 @@ namespace ExercicioAvaliacao
 
 
         public static int recebido;
-        
+
+        public static int pago;
+
 
 
 
@@ -44,6 +46,9 @@ namespace ExercicioAvaliacao
 
         public static int  Recebimento { get; set; }
 
-       
+
+        public static int Pago { get; set; }
+
+
     }
 }

@@ -16,6 +16,9 @@ namespace ExercicioAvaliacao
         public ContasReceber()
         {
             InitializeComponent();
+            mostrar();
+            btnAlterar.Visible = false;
+            btnDeletar.Visible = false;
         }
         string continua = "yes";
 
@@ -45,6 +48,8 @@ namespace ExercicioAvaliacao
                         cnn.Open();
                         MessageBox.Show("Inserido com sucesso!");
                         string sql = "insert into contas (nome, descricao,valor,dataVencimento,pago_recebido,tipo) values ('" + txtNome.Text + "', '" + txtDescricao.Text + "','" + txtValor.Text + "','" + Globals.DataVencimento + "' ,'" + Globals.Recebimento + "', '" + 0 +"')";
+                        // usei 0 para definir o tipo dessa conta -> receber
+                        
                         MySqlCommand cmd = new MySqlCommand(sql, cnn);
                         cmd.ExecuteNonQuery();
 
@@ -75,7 +80,7 @@ namespace ExercicioAvaliacao
                 {
                     cnn.ConnectionString = "server = localhost; database = controle; uid = root; pwd =; port = 3306; Convert Zero DateTime = true";
                     cnn.Open();
-                    string sql = "Select * from contas";
+                    string sql = "Select * from contas where tipo=0";  // vai mostrar somente os dados de 'contas a RECEBER"
                     DataTable table = new DataTable();
                     MySqlDataAdapter adpter = new MySqlDataAdapter(sql, cnn);
                     adpter.Fill(table);
@@ -137,6 +142,8 @@ namespace ExercicioAvaliacao
                 txtDescricao.Text = dgwContasReceber.CurrentRow.Cells[2].Value.ToString();
                 txtValor.Text = dgwContasReceber.CurrentRow.Cells[3].Value.ToString();
                 dtpDataVencimento.Value = Convert.ToDateTime(dgwContasReceber.CurrentRow.Cells[4].ToString());
+                cbRecebido.Text = dgwContasReceber.CurrentRow.Cells[7].Value.ToString();
+
 
                 btnDeletar.Visible = true;
                 btnAlterar.Visible = true;
