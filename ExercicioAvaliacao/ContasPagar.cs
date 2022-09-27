@@ -54,7 +54,7 @@ namespace ExercicioAvaliacao
                         cnn.ConnectionString = "server = localhost; database = controle; uid = root; pwd =; port = 3306; Convert Zero DateTime = true";
                         cnn.Open();
                         MessageBox.Show("Inserido com sucesso!");
-                        string sql = "insert into contas (nome, descricao,valor,dataVencimento,pago_recebido,tipo) values ('" + txtNome.Text + "', '" + txtDescricao.Text + "','" + txtValor.Text + "','" + Globals.DataVencimento + "' ,'" + Globals.Pago+ "', '" + 1 + "')";
+                        string sql = "insert into contas (nome, descricao,valor,dataVencimento,pago_recebido,tipo) values ('" + txtNome.Text + "', '" + txtDescricao.Text + "','" + txtValor.Text + "','" + Globals.DataVencimento + "' ,'"+ Globals.Pago+"', '" + 1 + "')";
                         MySqlCommand cmd = new MySqlCommand(sql, cnn);
                         cmd.ExecuteNonQuery();
 
@@ -113,7 +113,7 @@ namespace ExercicioAvaliacao
             txtNome.Text = "";
             txtDescricao.Text = "";
             txtValor.Text = "";
-            cbPago.Text = "";
+            cbPago.Checked = false;
             btnInserir.Text = "INSERIR";
             btnDeletar.Visible = false;
             btnAlterar.Visible = false;
@@ -218,6 +218,37 @@ namespace ExercicioAvaliacao
 
             }
             mostrar();
+        }
+
+        private void dgwContasPagar_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgwContasPagar.CurrentRow.Index != -1)
+            {
+                txtIdContasPagar.Text = dgwContasPagar.CurrentRow.Cells[0].Value.ToString();
+                txtNome.Text = dgwContasPagar.CurrentRow.Cells[1].Value.ToString();
+                txtDescricao.Text = dgwContasPagar.CurrentRow.Cells[2].Value.ToString();
+                txtValor.Text = dgwContasPagar.CurrentRow.Cells[3].Value.ToString();
+                dtpDataVencimento.Value = Convert.ToDateTime(dgwContasPagar.CurrentRow.Cells[4].ToString());
+                cbPago.Text = dgwContasPagar.CurrentRow.Cells[5].Value.ToString();
+
+                string pago = cbPago.Text;
+
+                if (pago == "Pago")             //Condição que vai checkar se no banco estiver escrito 'Pago', se não ele mudará a condição.
+                {
+                    cbPago.Checked = true;
+
+                }
+                else if (pago == "N/E")
+                {
+                    cbPago.Text = "Pago";
+                    cbPago.Checked = false;
+                }
+
+                btnDeletar.Visible = true;
+                btnAlterar.Visible = true;
+                btnInserir.Text = "Novo";
+            }
+
         }
     }
 }

@@ -100,11 +100,11 @@ namespace ExercicioAvaliacao
 
         void limpar()
         {
-            txtIdContasReceber.Text = "";
+            txtIdContasReceber.Text = ""; // esse Id é da tabela CONTA do banco
             txtNome.Text = "";
             txtDescricao.Text = "";
             txtValor.Text = "";
-            cbRecebido.Text = "";
+            cbRecebido.Checked=false;
             btnInserir.Text = "INSERIR";
             btnDeletar.Visible = false;
             btnAlterar.Visible = false;
@@ -141,8 +141,8 @@ namespace ExercicioAvaliacao
                 txtNome.Text = dgwContasReceber.CurrentRow.Cells[1].Value.ToString();
                 txtDescricao.Text = dgwContasReceber.CurrentRow.Cells[2].Value.ToString();
                 txtValor.Text = dgwContasReceber.CurrentRow.Cells[3].Value.ToString();
-                dtpDataVencimento.Value = Convert.ToDateTime(dgwContasReceber.CurrentRow.Cells[4].ToString());
-                cbRecebido.Text = dgwContasReceber.CurrentRow.Cells[7].Value.ToString();
+               // dtpDataVencimento.Value = Convert.ToDateTime(dgwContasReceber.CurrentRow.Cells[4].ToString());
+                cbRecebido.Text = dgwContasReceber.CurrentRow.Cells[5].Value.ToString();
 
 
                 btnDeletar.Visible = true;

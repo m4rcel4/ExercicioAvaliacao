@@ -37,6 +37,8 @@
             this.btnContasPagar = new System.Windows.Forms.Button();
             this.btnContasReceber = new System.Windows.Forms.Button();
             this.btnPesquisar = new System.Windows.Forms.Button();
+            this.txtIdContasR = new System.Windows.Forms.TextBox();
+            this.txtIdContasP = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgwContasPagar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgwContasReceber)).BeginInit();
             this.SuspendLayout();
@@ -44,23 +46,25 @@
             // dgwContasPagar
             // 
             this.dgwContasPagar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgwContasPagar.Location = new System.Drawing.Point(33, 48);
+            this.dgwContasPagar.Location = new System.Drawing.Point(30, 140);
             this.dgwContasPagar.Name = "dgwContasPagar";
-            this.dgwContasPagar.Size = new System.Drawing.Size(500, 140);
+            this.dgwContasPagar.Size = new System.Drawing.Size(584, 190);
             this.dgwContasPagar.TabIndex = 0;
+            this.dgwContasPagar.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwContasPagar_CellDoubleClick_1);
             // 
             // dgwContasReceber
             // 
             this.dgwContasReceber.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgwContasReceber.Location = new System.Drawing.Point(36, 251);
+            this.dgwContasReceber.Location = new System.Drawing.Point(33, 428);
             this.dgwContasReceber.Name = "dgwContasReceber";
-            this.dgwContasReceber.Size = new System.Drawing.Size(500, 140);
+            this.dgwContasReceber.Size = new System.Drawing.Size(584, 190);
             this.dgwContasReceber.TabIndex = 1;
+            this.dgwContasReceber.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwContasReceber_CellDoubleClick_1);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(33, 32);
+            this.label1.Location = new System.Drawing.Point(27, 98);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(80, 13);
             this.label1.TabIndex = 2;
@@ -69,7 +73,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(33, 235);
+            this.label2.Location = new System.Drawing.Point(30, 386);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(88, 13);
             this.label2.TabIndex = 3;
@@ -77,25 +81,27 @@
             // 
             // btnPagar
             // 
-            this.btnPagar.Location = new System.Drawing.Point(548, 48);
+            this.btnPagar.Location = new System.Drawing.Point(651, 204);
             this.btnPagar.Name = "btnPagar";
-            this.btnPagar.Size = new System.Drawing.Size(119, 29);
+            this.btnPagar.Size = new System.Drawing.Size(90, 65);
             this.btnPagar.TabIndex = 4;
             this.btnPagar.Text = "pagar";
             this.btnPagar.UseVisualStyleBackColor = true;
+            this.btnPagar.Click += new System.EventHandler(this.btnPagar_Click);
             // 
             // btnReceber
             // 
-            this.btnReceber.Location = new System.Drawing.Point(548, 251);
+            this.btnReceber.Location = new System.Drawing.Point(651, 508);
             this.btnReceber.Name = "btnReceber";
-            this.btnReceber.Size = new System.Drawing.Size(119, 29);
+            this.btnReceber.Size = new System.Drawing.Size(90, 65);
             this.btnReceber.TabIndex = 4;
             this.btnReceber.Text = "receber";
             this.btnReceber.UseVisualStyleBackColor = true;
+            this.btnReceber.Click += new System.EventHandler(this.btnReceber_Click);
             // 
             // btnContasPagar
             // 
-            this.btnContasPagar.Location = new System.Drawing.Point(548, 83);
+            this.btnContasPagar.Location = new System.Drawing.Point(741, 12);
             this.btnContasPagar.Name = "btnContasPagar";
             this.btnContasPagar.Size = new System.Drawing.Size(119, 29);
             this.btnContasPagar.TabIndex = 4;
@@ -105,7 +111,7 @@
             // 
             // btnContasReceber
             // 
-            this.btnContasReceber.Location = new System.Drawing.Point(548, 286);
+            this.btnContasReceber.Location = new System.Drawing.Point(741, 48);
             this.btnContasReceber.Name = "btnContasReceber";
             this.btnContasReceber.Size = new System.Drawing.Size(119, 29);
             this.btnContasReceber.TabIndex = 4;
@@ -115,18 +121,34 @@
             // 
             // btnPesquisar
             // 
-            this.btnPesquisar.Location = new System.Drawing.Point(36, 429);
+            this.btnPesquisar.Location = new System.Drawing.Point(474, 12);
             this.btnPesquisar.Name = "btnPesquisar";
             this.btnPesquisar.Size = new System.Drawing.Size(225, 28);
             this.btnPesquisar.TabIndex = 5;
             this.btnPesquisar.Text = "PESQUISAR";
             this.btnPesquisar.UseVisualStyleBackColor = true;
             // 
+            // txtIdContasR
+            // 
+            this.txtIdContasR.Location = new System.Drawing.Point(33, 402);
+            this.txtIdContasR.Name = "txtIdContasR";
+            this.txtIdContasR.Size = new System.Drawing.Size(51, 20);
+            this.txtIdContasR.TabIndex = 6;
+            // 
+            // txtIdContasP
+            // 
+            this.txtIdContasP.Location = new System.Drawing.Point(30, 114);
+            this.txtIdContasP.Name = "txtIdContasP";
+            this.txtIdContasP.Size = new System.Drawing.Size(48, 20);
+            this.txtIdContasP.TabIndex = 7;
+            // 
             // ControleContas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 514);
+            this.ClientSize = new System.Drawing.Size(889, 647);
+            this.Controls.Add(this.txtIdContasP);
+            this.Controls.Add(this.txtIdContasR);
             this.Controls.Add(this.btnPesquisar);
             this.Controls.Add(this.btnReceber);
             this.Controls.Add(this.btnContasReceber);
@@ -156,5 +178,7 @@
         private System.Windows.Forms.Button btnContasPagar;
         private System.Windows.Forms.Button btnContasReceber;
         private System.Windows.Forms.Button btnPesquisar;
+        private System.Windows.Forms.TextBox txtIdContasR;
+        private System.Windows.Forms.TextBox txtIdContasP;
     }
 }

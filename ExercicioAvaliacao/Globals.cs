@@ -13,13 +13,13 @@ namespace ExercicioAvaliacao
         // data invertida exigida pelas configurações do banco, que só recebe DATE.
 
 
-        public static DateTime data;
+        //public static DateTime data; // usada no form agenda
         public static string dataNova;
 
 
 
-        public static DateTime dataVenc;
-        public static string dataVencimento;
+        //public static DateTime dataVenc;  // usada nos forms contas
+        //public static string dataVencimento;
 
 
         public static int recebido;
